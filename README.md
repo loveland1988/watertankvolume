@@ -2,10 +2,12 @@ Disclaimer: This project was 100% vibe-coded with ChatGPT.
 
 ## Summary:
 This project uses a Raspberry Pi and a couple sensors to run a web server that reports the following in JSON: 
-- current volume of water (or any liquid, I guess) in a tank with known dimensions
-- Temperature
-- Humidity
-- Distance from sensor to water surface
+- temperature in Celsius
+- temperature in Fahrenheit
+- humidity percentage
+- distance to water surface in cm
+- height of water in cm
+- volume of water in a tank with known dimensions
 You can then use the output from the web server in Home Assistant.
 
 
@@ -27,12 +29,14 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
 
 ## Files
 - watertankvolume.py
-  - Creates web server, calculates volume, and reports temp and humidity (and distance to water surface)
+  - Creates web server, calculates volume, and reports out the values in JSON
 - watertank.service (sets up daemon so program runs at boot)
   - This should be placed in /etc/systemd/system/
   - You will need to update this to reflect the location of your virtual environment and the watertankvolume.py file
+- IMG_4850.jpeg - picture of my janky setup
+- requirements.txt
 
-## How To Use
+## Set up the Pi
 1. Flash SD card with Raspberry Pi OS - I used the latest headless 64-bit (non-desktop) vesion
 2. Wire up your rig (see links above for instructions and note the different GPIOs used in this project for the ultrasonic sensor)
 3. SSH into your Raspberry Pi
@@ -66,3 +70,51 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
 ## Some other notes
 - 
 - 
+
+## How it Works
+1. The DHT22 measures the current temperature (and humidity)
+2. The RPi calculates the speed of sound (m/s): v<sub>sound</sub> = 331.3 + 0.606 * temperature<sub>Celsius</sub>
+3. The RPi tells the HC-SR04 to send an ultrasonic pulse through the trigger pin which is reflected and picked up by the echo pin.
+4. The RPi measures the travel time between the trigger and echo (and divides by 2 since the sound traveled to the water and then back)
+5. The RPi calculates the distance: d =  v<sub>sound</sub> * (travel time/2)
+6. The water tank dimensions and shape (cylinder in my case) are known, so if the tank is full, the distance would be ~0.  We can calculate the volume of water as volume = pi * r<sub>tank</sub><sup>2</sup> * (h<sub>tank</sub> - d).  As of 9/15/25, this part of the program is approximate as I am only using estimated dimensions.
+7. The python script averages five measurements and then reports out the values for {temperature_c, temperature_f, humidity_percent, distance_cm, waterheight_cm, volume_gallons} in JSON via the web server.
+
+## Connect to Home Assistant
+1. Update your configuration.yaml
+  - I did this by SSHing into my HA VM, but I think there are other ways to do it
+  - `nano /root/config/configuration.yaml`
+    ```
+    sensor:
+      - platform: rest
+        name: "Water Tank Raw"
+        resource: "http://<ip address of RPi>:5000/sensor"
+        json_attributes:
+          - distance_cm
+          - water_height_cm
+          - volume_gallons
+          - temperature_c
+          - temperature_f
+          - humidity_percent
+        value_template: "{{ value_json.volume_gallons }}"
+        scan_interval: 15
+
+    template:
+      - sensor:
+          - name: "Water Tank Volume"
+            unit_of_measurement: "gal"
+            state: "{{ state_attr('sensor.water_tank_raw', 'volume_gallons') | round(0) }}"
+          - name: "Water Tank Distance"
+            unit_of_measurement: "cm"
+            state: "{{ state_attr('sensor.water_tank_raw', 'distance_cm') | round(1) }}"
+          - name: "Water Tank Water Height"
+            unit_of_measurement: "cm"
+            state: "{{ state_attr('sensor.water_tank_raw', 'water_height_cm') | round(1) }}"
+          - name: "Water Tank Temperature"
+            unit_of_measurement: "°F"
+            state: "{{ state_attr('sensor.water_tank_raw', 'temperature_f') | round(1) }}"
+          - name: "Water Tank Humidity"
+            unit_of_measurement: "%"
+            state: "{{ state_attr('sensor.water_tank_raw', 'humidity_percent') | round(1) }}"
+      ```
+2. Add 
