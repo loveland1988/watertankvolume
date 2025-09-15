@@ -71,9 +71,9 @@ def calculate_volume(distance_cm):
 
 @app.route("/sensor")
 def sensor():
-    # Take 5 measurements, average
+    # Take 11 measurements, median
     distances = []
-    for _ in range(5):
+    for _ in range(11):
         try:
             d = measure_distance()
             distances.append(d)
