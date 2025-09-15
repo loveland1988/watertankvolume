@@ -117,4 +117,31 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
             unit_of_measurement: "%"
             state: "{{ state_attr('sensor.water_tank_raw', 'humidity_percent') | round(1) }}"
       ```
-2. Add 
+2. Add a card to your dashboard that calls on the sensor added in the step above
+  - I used a gauge card for the volume
+    ```
+    type: gauge
+    entity: sensor.water_tank_volume
+    max: 1200
+    min: 200
+    unit: Gallons
+    name: Workshop Water Tank
+    needle: false
+    severity:
+      green: 800
+      yellow: 500
+      red: 200
+    ```
+  - And an entities card for the other values
+    ```
+    type: entities
+    title: Water Tank
+    entities:
+      - entity: sensor.water_tank_distance
+        name: Distance
+      - entity: sensor.water_tank_temperature
+        name: Temperature
+      - entity: sensor.water_tank_humidity
+    ```
+
+
