@@ -43,10 +43,11 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
 2. Wire up your rig (see links above for instructions and note the different GPIOs used in this project for the ultrasonic sensor)
 3. SSH into your Raspberry Pi
 -   `ssh <username>@<ip address>`
-4. Create a virtual environment
--   `sudo python3 -m venv venv`
-5. Activate virtual environment
--   `source venv/bin/activate`
+4. Clone github repository
+  - `git clone https://github.com/loveland1988/watertankvolume.git`
+5. Create and activate virtual environment
+  - `sudo python3 -m venv venv`
+  - `source venv/bin/activate`
 6. Install python packages
 -   `pip install -r requirements.txt`
 7. Test program
@@ -59,12 +60,12 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
   - Deactivate power save mode
     -   `sudo iwconfig wlan0 power off`
   - Keep power save mode off persistent through reboots
-
-    ```Create file
+    - Create file
+    ```
     sudo nano /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
     ```
-
-    ```Paste into the file
+    - Paste into the file:
+    ```
     [connection]
     wifi.powersave = 2
     ```
