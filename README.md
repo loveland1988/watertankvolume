@@ -37,9 +37,9 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
 2. Wire up your rig (see links above for instructions and note the different GPIOs used in this project for the ultrasonic sensor)
 3. SSH into your Raspberry Pi
 4. Create a virtual environment
--   python3 -m venv venv
+-   `sudo python3 -m venv venv`
 5. Activate virtual environment
--   source venv/bin/activate
+-   `source venv/bin/activate`
 
 ## Some other notes
 - 
