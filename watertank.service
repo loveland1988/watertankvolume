@@ -1,0 +1,13 @@
+[Unit]
+Description=Water Tank Sensor Flask App
+After=network.target
+
+[Service]
+User=admin
+WorkingDirectory=/home/admin
+ExecStart=/home/admin/dht22/venv/bin/python /home/admin/watertankvolume.py
+Restart=always
+Environment="PATH=/home/admin/dht22/venv/bin"
+
+[Install]
+WantedBy=multi-user.target
