@@ -44,7 +44,7 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
 -   `pip install -r requirements.txt`
 7. Test program
 -   `python3 watertankvolume.py`
-  - In your browser, go to: http://<ip address of pi>:5000/sensor
+  - In your browser, go to: http://\<ip address of pi\>:5000/sensor
     - To get your IP address in terminal: `ifconfig`
 8. If the program is working, you can now copy over the service file and activate it
 
