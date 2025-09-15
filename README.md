@@ -54,14 +54,11 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
     -   `sudo iwconfig wlan0 power off`
   - Keep power save mode off persistent through reboots
 
-    ```
-    #Create file
+    ```Create file
     sudo nano /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
     ```
 
-    ```
-    #Paste the next 2 lines into the file
-
+    ```Paste into the file
     [connection]
     wifi.powersave = 2
     ```
