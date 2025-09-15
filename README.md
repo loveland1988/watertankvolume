@@ -55,7 +55,8 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
   - Keep power save mode off persistent through reboots
     -   `sudo nano /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf`
     -   ```[connection]
-    -   wifi.powersave = 2```
+wifi.powersave = 2
+```
 
 ## Some other notes
 - 
