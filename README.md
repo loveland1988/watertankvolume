@@ -40,6 +40,14 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
 -   `sudo python3 -m venv venv`
 5. Activate virtual environment
 -   `source venv/bin/activate`
+6. Install python packages
+-   `pip install -r requirements.txt`
+7. Test program
+-   `python3 watertankvolume.py`
+  - In your browser, go to: http://<ip address of pi>:5000/sensor
+    - To get your IP address in terminal: `ifconfig`
+8. If the program is working, you can now copy over the service file and activate it
+
 
 ## Some other notes
 - 
