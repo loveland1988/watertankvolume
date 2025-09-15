@@ -17,8 +17,8 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
 - Raspberry Pi Zero 2W (with header)
 - HC-SR04 ultrasonic sensor
   - Resistors for voltage divider
-    - 330Ohm resistor
-    - 470Ohm resistor
+    - 330 Ohm resistor
+    - 470 Ohm resistor
   - Wiring instructions for HC-SR04 can be found here: https://www.raspberrypi-spy.co.uk/2012/12/ultrasonic-distance-measurement-using-python-part-1/
     - Note: I think I burned up GPIO 23 and/or 24 on my Pi, so my code uses GPIO17 for trig and GPIO22 for echo
 - DHT22 temp/humidity sensor (more accurate speed of sound calc and to report temp/humidity)
