@@ -82,7 +82,7 @@ def sensor():
             pass
 
     if distances:
-        avg_distance = statistics.mean(distances)
+        avg_distance = statistics.median(distances)
         water_height, gallons = calculate_volume(avg_distance)
         last_values["distance_cm"] = avg_distance
         last_values["water_height_cm"] = water_height

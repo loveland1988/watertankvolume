@@ -42,16 +42,18 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
 1. Flash SD card with Raspberry Pi OS - I used the latest headless 64-bit (non-desktop) vesion
 2. Wire up your rig (see links above for instructions and note the different GPIOs used in this project for the ultrasonic sensor)
 3. SSH into your Raspberry Pi
--   `ssh <username>@<ip address>`
+  - `ssh <username>@<ip address>`
 4. Clone github repository
   - `git clone https://github.com/loveland1988/watertankvolume.git`
 5. Create and activate virtual environment
   - `sudo python3 -m venv venv`
   - `source venv/bin/activate`
 6. Install python packages
--   `pip install -r requirements.txt`
+  - `pip install -r requirements.txt`
+  - If you run into an issue installing any of the packages, you may need to change ownership of the virtual environment folder
+      - `sudo chown -R <your username>:<your username> ~/watertankvolume/venv`
 7. Test program
--   `python3 watertankvolume.py`
+  - `python3 watertankvolume.py`
   - In your browser, go to: `http://<ip address of pi>:5000/sensor`
 8. If the program is working, you can now copy over the service file and activate it by reloading the daemon
 -   `sudo cp watertank.service /etc/systemd/system/`
