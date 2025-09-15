@@ -70,9 +70,7 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
     wifi.powersave = 2
     ```
 
-## Some other notes
-- 
-- 
+
 
 ## How it Works
 1. The DHT22 measures the current temperature (and humidity)
