@@ -4,10 +4,10 @@ After=network.target
 
 [Service]
 User=admin
-WorkingDirectory=/home/admin
-ExecStart=/home/admin/dht22/venv/bin/python /home/admin/watertankvolume.py
+WorkingDirectory=/home/admin/watertankvolume
+ExecStart=/home/admin/watertankvolume/venv/bin/python /home/admin/watertankvolume/watertankvolume.py
 Restart=always
-Environment="PATH=/home/admin/dht22/venv/bin"
+Environment="PATH=/home/admin/watertankvolume/venv/bin"
 
 [Install]
 WantedBy=multi-user.target
