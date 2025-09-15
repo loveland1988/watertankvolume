@@ -36,7 +36,7 @@ I have a 1200gal water tank which is slowly filled by pumping water from an old 
   - This should be placed in /etc/systemd/system/
   - You will need to update this to reflect the location of your virtual environment and the watertankvolume.py file
 - jankyrig.jpeg - picture of my test setup
-- Home Assistant Card.png
+- hacard.png
 
 ## Set up the Pi
 1. Flash SD card with Raspberry Pi OS - I used the latest headless 64-bit (non-desktop) vesion
