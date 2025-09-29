@@ -1,6 +1,6 @@
 Disclaimer: This project was 100% vibe-coded with ChatGPT.
 
-## Summary:
+## Summary
 This project uses a Raspberry Pi and a couple sensors to run a web server that reports the following in JSON: 
 - temperature in Celsius
 - temperature in Fahrenheit
@@ -11,7 +11,7 @@ This project uses a Raspberry Pi and a couple sensors to run a web server that r
 You can then use the output from the web server in Home Assistant.
 
 
-## Background:
+## Background
 I have a 1200gal water tank which is slowly filled by pumping water from an old well on my property (~10gal every 2hrs).  To avoid stressing (read: running dry) my house well, I exclusively use the water tank for irrigation (garden, new trees, etc).  If my usage is low, then the tank will overflow without manual intervention.  If my usage is high and the tank is drawn too low, I run the risk of burning up the pump that feeds the irrigation system.  So, I needed a reasonably-reliable method for estimating the amount of water in the tank (without physically checking it).
 
 
